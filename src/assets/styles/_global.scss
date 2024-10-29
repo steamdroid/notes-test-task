@@ -1,0 +1,30 @@
+@use 'vars' as *;
+@use 'mixins' as *;
+
+body {
+  @include text-normal;
+
+  background-color: $c-dark;
+  color: $c-white;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: $container-xl;
+
+  @include lg {
+    max-width: $container-lg;
+  }
+
+  @include md {
+    max-width: $container-md;
+  }
+
+  @include sm {
+    max-width: $container-sm;
+  }
+}
+
+a {
+  @include link;
+}

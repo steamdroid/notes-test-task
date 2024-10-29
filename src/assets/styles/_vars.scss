@@ -1,0 +1,25 @@
+// цвета
+$c-dark: #0a1f38;
+$c-dark-middle: #1b2f46;
+$c-dark-light: #2f4056;
+$c-gray: #9da5af;
+
+$c-green-dark: #819400;
+$c-green-middle: #97ab0d;
+$c-green: #a5bb0c;
+$c-green-light: #b1c909;
+
+$c-white: #ffffff;
+
+// шрифты
+$f-montserrat: 'Montserrat';
+
+// адаптив
+$container-xl: 1600px;
+$container-lg: 1206px;
+$container-md: 688px;
+$container-sm: calc(100vw - 40px);
+
+$breakpoint-lg: 1640px;
+$breakpoint-md: 1246px;
+$breakpoint-sm: 767px;

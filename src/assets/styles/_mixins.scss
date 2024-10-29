@@ -1,0 +1,168 @@
+@use 'vars' as *;
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+@mixin font-face(
+  $name,
+  $path,
+  $weight: null,
+  $style: null,
+  $exts: eot woff2 woff ttf svg
+) {
+  $src: null;
+
+  $extmods: (
+    eot: '?',
+    svg: '#' + str-replace($name, ' ', '_'),
+  );
+
+  $formats: (
+    otf: 'opentype',
+    ttf: 'truetype',
+  );
+
+  @each $ext in $exts {
+    $extmod: if(
+      map-has-key($extmods, $ext),
+      $ext + map-get($extmods, $ext),
+      $ext
+    );
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append(
+      $src,
+      url(quote($path + '.' + $extmod)) format(quote($format)),
+      comma
+    );
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+@mixin lg {
+  @media screen and (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+// текстовые стили
+
+@mixin h1 {
+  font-family: $f-montserrat;
+  font-size: 104px;
+  font-weight: 900;
+  line-height: 104px;
+}
+
+@mixin h1-sm {
+  font-family: $f-montserrat;
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 64px;
+}
+
+@mixin h2 {
+  font-family: $f-montserrat;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 72px;
+}
+
+@mixin h3 {
+  font-family: $f-montserrat;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+@mixin h3-sm {
+  font-family: $f-montserrat;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+@mixin h4 {
+  font-family: $f-montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+@mixin text-normal {
+  font-family: $f-montserrat;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+@mixin text-small {
+  font-family: $f-montserrat;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@mixin text-small-mob {
+  font-family: $f-montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin text-small-bold {
+  font-family: $f-montserrat;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+@mixin text-small-bold-mob {
+  font-family: $f-montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+@mixin link {
+  @include text-small-bold;
+  color: $c-green-light;
+  text-decoration: none;
+  border: none;
+  background: none;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    color: $c-white;
+  }
+}

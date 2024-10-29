@@ -1,0 +1,7 @@
+@use 'mixins' as *;
+
+@include font-face('Montserrat', '@/assets/fonts/Montserrat-Black', 900);
+@include font-face('Montserrat', '@/assets/fonts/Montserrat-Bold', 700);
+@include font-face('Montserrat', '@/assets/fonts/Montserrat-SemiBold', 600);
+@include font-face('Montserrat', '@/assets/fonts/Montserrat-Medium', 500);
+@include font-face('Montserrat', '@/assets/fonts/Montserrat-Regular', 400);
