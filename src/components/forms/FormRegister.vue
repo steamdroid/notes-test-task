@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { register } from '@/helpers/api';
-import { checkEmptyTextValue } from '@/helpers/validate';
 import { useModalStore } from '@/stores/modal';
+import { register } from '@/helpers/api';
+import {
+  checkEmptyTextValue,
+  checkIncorrectEmailValue,
+} from '@/helpers/validate';
 
 import ButtonRegular from '@/components/controls/ButtonRegular.vue';
 import TextField from '@/components/controls/TextField.vue';
@@ -19,7 +22,8 @@ const passwordError = ref(null);
 const passwordAgainError = ref(null);
 
 const handleRegistration = async () => {
-  emailError.value = checkEmptyTextValue(email.value);
+  emailError.value =
+    checkEmptyTextValue(email.value) || checkIncorrectEmailValue(email.value);
   passwordError.value = checkEmptyTextValue(password.value);
   passwordAgainError.value = checkEmptyTextValue(passwordAgain.value);
 

@@ -3,7 +3,10 @@ import { ref } from 'vue';
 import { login } from '@/helpers/api';
 import { useModalStore } from '@/stores/modal';
 import { useAuthStore } from '@/stores/auth';
-import { checkEmptyTextValue } from '@/helpers/validate';
+import {
+  checkEmptyTextValue,
+  checkIncorrectEmailValue,
+} from '@/helpers/validate';
 
 import ButtonRegular from '@/components/controls/ButtonRegular.vue';
 import TextField from '@/components/controls/TextField.vue';
@@ -19,7 +22,8 @@ const emailError = ref(null);
 const passwordError = ref(null);
 
 const handleLogin = async () => {
-  emailError.value = checkEmptyTextValue(email.value);
+  emailError.value =
+    checkEmptyTextValue(email.value) || checkIncorrectEmailValue(email.value);
   passwordError.value = checkEmptyTextValue(password.value);
 
   if (emailError.value || passwordError.value) {
